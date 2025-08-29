@@ -299,7 +299,7 @@ setInterval(() => {
 document.getElementById('flexboxcontainer').addEventListener('click', function() {
   if (useMp3Audio) {
     // Play MP3 background music
-    const songs = ["Genox_edit.mp3"];
+    const songs = ["activesong.mp3"];
     const randomSong = songs[Math.floor(Math.random() * songs.length)];
     bgMusic.src = "assets/music/" + randomSong;
     bgMusic.play();
