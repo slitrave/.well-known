@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    /* Background video */
+    #background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Profile container */
+    .profile-container {
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px;
+      border-radius: 15px;
+      border: 1px solid white;
+      z-index: 1;
+    }
+
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      display: block;
+      margin: 0 auto 20px;
+    }
+
+    .name {
+      font-size: 2.5em;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      cursor: pointer;
+      transition: opacity 1s ease-in-out;
+    }
+    .fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .click-text {
+      color: white;
+      font-size: 2em;
+      animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px white, 0 0 20px white; }
+      to   { text-shadow: 0 0 20px white, 0 0 30px white; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Overlay -->
+  <div id="overlay" class="overlay">
+    <div class="click-text">Click to Enter</div>
+  </div>
+
+  <!-- Local background video (with audio) -->
+  <video id="background-video" loop preload="auto">
+    <source src="media/main1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Profile container -->
+  <div class="profile-container">
+    <img src="https://cdn.discordapp.com/avatars/837609737121169448/98e324c9960eb8db71f1b861bb7eab45.png?size=1024" alt="Profile Picture" class="profile-picture">
+    <h1 class="name">@Nicholas</h1>
+  </div>
+
+  <script>
+    // Title changing script
+    const titles = ["@", "@N", "@Ni", "@Nic", "@Nich", "@Nicho", "@Nichol", "@Nichola", "@Nicholas"];
+    let idx = 0;
+    setInterval(() => {
+      document.title = titles[idx];
+      idx = (idx + 1) % titles.length;
+    }, 700);
+
+    // Overlay + video/audio logic
+    const overlay = document.getElementById('overlay');
+    const video = document.getElementById('background-video');
+
+    overlay.addEventListener('click', () => {
+      overlay.classList.add('fade-out');
+      video.muted = false;   // unmute so audio plays
+      video.play();          // start playback
+    });
+  </script>
+</body>
+</html>

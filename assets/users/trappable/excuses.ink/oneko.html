@@ -1,0 +1,576 @@
+<!--
+
+made with 💖 by six n bamden <3
+
+--><!DOCTYPE html><html lang="en">
+<!-- Mirrored from excuses.ink/oneko.gif by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 23 Aug 2025 14:28:55 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width" initial-scale="1">
+    <meta property="og:title" content="velos">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="index.html">
+    <meta property="og:image" content="">
+    <meta property="og:description" content=">.<">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta name="theme-color" content="#add8e6">
+    <title>velos</title>
+    <script src="js/core.html"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&amp;display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&amp;display=swap');
+
+        ::selection {
+            color: #000;
+            background: transparent;
+        }
+
+        body {
+            align-items: center;
+            display: flex;
+            font-family: "Poppins", serif;
+            font-weight: 300;
+            height: 100vh;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #preloader {
+            background: #000;
+            border: 0.72px solid #000;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transition: opacity 300ms ease;
+            width: 100%;
+            z-index: 999;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            text-shadow: 0 0 15px #fff;
+            font-size: 25px;
+        }
+
+        #preloader.hidden {
+            display: none;
+        }
+
+        #background-video {
+            height: 100%;
+            left: 0;
+            object-fit: cover;
+            opacity: 0;
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            transition: opacity 0.5s ease-out;
+            user-select: none;
+            width: 100%;
+            z-index: -1;
+        }
+
+        #background-video.show {
+            opacity: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInSlightly {
+            from {
+                transform: translateY(20%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        #content-box {
+            align-items: center;
+            background: rgba(15, 15, 15, 0.123);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(27, 27, 27, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.67);
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+            width: 400px;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #content-box.show {
+            animation: slideInSlightly 0.5s ease-in-out, fadeIn 0.5s ease-in-out;
+            opacity: 1;
+        }
+
+        #profile-picture-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        #profile-picture {
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+        }
+
+        #overlay-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120px;
+            height: 120px;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        #name, #typewriter {
+            color: white;
+            text-shadow: 0 0 10px #fff;
+        }
+
+        #name {
+            font-size: 1.5em;
+            margin-top: 10px;
+        }
+
+        #typewriter {
+            font-size: 1em;
+            margin-top: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            max-width: 200px;
+            width: 100%;
+        }
+
+        .social-icons a {
+            margin: 0;
+            transition: transform 0.3s;
+        }
+
+        .social-icons a:hover {
+            transform: scale(1.2);
+        }
+
+        .social-icons svg {
+            fill: white;
+            filter: drop-shadow(0 0 5px #fff);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+        }
+
+        .social-icons svg.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .social-icons svg:hover {
+            filter: drop-shadow(0 0 10px white);
+            transform: scale(1.2);
+        }
+
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(15, 15, 15, 0.123);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(27, 27, 27, 0.3);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.67);
+            padding: 15px;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+
+        #song-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #album-art {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        #song-details {
+            flex-grow: 1;
+        }
+
+        #song-title {
+            font-weight: bold;
+            margin-bottom: 2px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #song-artist {
+            font-size: 0.9em;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        #play-pause-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+            min-width: 24px;
+        }
+
+        #play-pause-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        .progress-volume-container {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+
+        #progress-bar-container {
+            flex: 1;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        #progress-bar {
+            width: 0;
+            height: 100%;
+            background: white;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+
+        .time-display {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0 8px;
+            min-width: 45px;
+            text-align: center;
+        }
+
+        .volume-control {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 9999;
+    color: #ffffff;
+}
+
+.volume-icon {
+    cursor: pointer;
+    font-style: normal;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.volume-icon:hover {
+    opacity: 1;
+}
+
+.volume-slider {
+    width: 0; 
+    opacity: 0;
+    transition: all 0.3s ease;
+    margin-left: 10px;
+    cursor: pointer;
+    background: transparent;
+    position: relative;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+}
+
+.volume-control:hover .volume-slider {
+    width: 100px;
+    opacity: 1;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: #ffffff;
+    margin-top: -3px;
+    cursor: grab;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background: #ffffff4d;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: none;
+    cursor: grab;
+}
+
+.volume-slider::-moz-range-track {
+    width: 100%;
+    height: 4px;
+    background: #ffffff4d;
+    border-radius: 2px;
+    border: none;
+    cursor: pointer;
+}
+
+.volume-slider:active {
+    cursor: grabbing;
+}
+
+    </style>
+</head>
+<body>
+    <div class="volume-control">
+        <i class="volume-icon">🔊</i>
+        <input type="range" class="volume-slider" min="0" max="100" value="50">
+    </div>
+    <div id="preloader" class="preloader" onclick="startAnimations()">click me.. </div>
+    <video id="background-video" autoplay="" loop="" muted="" playsinline="">
+        <source src="https://r2.guns.lol/09490402-0b83-4793-ba93-8ef5aa0973c4.mp4" type="video/mp4">
+    </video>
+    <audio loop="" id="background-audio" src="https://r2.guns.lol/c0f76d7d-97e8-4cdf-aed8-a978d7e73110.mp3"></audio>
+    <div id="content-box">
+        <div id="profile-picture-container">
+            <img id="profile-picture" src="images/pwm1jw.html">
+            <img id="overlay-image" src="../cdn.discordapp.com/avatar-decoration-presets/a_c3cffc19e9784f7d0b005eecdf1b566ef8ad.png?size=240&amp;passthrough=true">
+        </div>
+        <div style="background-image: url(images/sparkle_white.html)" id="name">velos</div>
+        <div id="typewriter"></div>
+        <div class="social-icons">
+            
+            <a href="https://t.me/bandokays" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="45" height="45">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19c-.14.75-.42 1-.68 1.03c-.58.05-1.02-.38-1.58-.75c-.88-.58-1.38-.94-2.23-1.5c-.99-.65-.35-1.01.22-1.59c.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02c-.09.02-1.49.95-4.22 2.79c-.4.27-.76.41-1.08.4c-.36-.01-1.04-.2-1.55-.37c-.63-.2-1.12-.31-1.08-.66c.02-.18.27-.36.74-.55c2.92-1.27 4.86-2.11 5.83-2.51c2.78-1.16 3.35-1.36 3.73-1.36c.08 0 .27.02.39.12c.1.08.13.19.14.27c-.01.06.01.24 0 .38"></path>
+                </svg>
+            </a>
+            <a href="https://discord.com/users/1135865321614491698" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="45" height="45">
+                    <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.1.1 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.1 16.1 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02M8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12m6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12"></path>
+                </svg>
+            </a>
+            <a href="https://www.roblox.com/users/337325862/profile" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="37" height="45" class="fill-[#4D4FB7] drop-shadow-[0_0_3.5px_#4D4FB7]">
+                    <path d="M18.926 23.998L0 18.892L5.075.002L24 5.108ZM15.348 10.09l-5.282-1.453l-1.414 5.273l5.282 1.453z"></path>
+                </svg>
+            </a>
+        </div>
+
+    </div>
+    <div class="music-player">
+        <div id="song-info">
+            <img id="album-art" src="../i1.sndcdn.com/avatars-Tg8VT8Rbjsg2lkoU-mCzcCQ-t240x240.jpg">
+            <div id="song-details">
+                <div id="song-title">Mission To The Loot</div>
+                <div id="song-artist">Lil Uzi Vert</div>
+            </div>
+        </div>
+        <div id="controls">
+            <button id="play-pause-btn">
+                <svg id="pause-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M6 4h4v16H6zM14 4h4v16h-4z"></path>
+                </svg>
+                <svg id="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
+                    <path d="M8 5v14l11-7z"></path>
+                </svg>
+            </button>
+            <div class="progress-volume-container">
+                <span class="time-display" id="current-time">0:00</span>
+                <div id="progress-bar-container">
+                    <div id="progress-bar"></div>
+                </div>
+                <span class="time-display" id="total-time">0:00</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function startAnimations() {
+            document.querySelectorAll('.social-icons svg').forEach(svg => {
+                svg.classList.add('animate');
+            });
+            let preloader = document.querySelector('.preloader');
+            preloader.style.opacity = 0;
+            setTimeout(() => {
+                preloader.style.display = "none";
+                document.getElementById('background-video').classList.add('show');
+                document.getElementById('content-box').classList.add('show');
+                document.getElementById('background-audio').play();
+                setTimeout(() => {
+                    document.querySelector('.music-player').style.opacity = '1';
+                }, 300);
+            }, 300);
+        }
+
+        var audio = document.getElementById("background-audio");
+    </script>
+    <script>
+
+    </script>
+    <!-- 
+     ADD 
+        .deleteAll()
+        .typeString('[text]')
+        .pauseFor(1000)
+    to add more text to the typewriter effect
+    -->
+    <script>
+        var app = document.getElementById('typewriter');
+        var typewriter = new Typewriter(app, {
+            loop: true,
+            cursor: '|'
+        });
+        typewriter
+            .typeString('^-^')
+            .pauseFor(1000)
+            .deleteAll()
+            .typeString('Long Live Skeleton') 
+            .pauseFor(1000)
+            .deleteAll()
+            .typeString('<3')
+            .pauseFor(1000)
+            .deleteAll()
+            .start();
+    </script>
+        <script>
+            fetch(`https://api.lanyard.rest/v1/users/1135865321614491698`)
+                .then(response => response.json())
+                .then(data => {
+        const avatarHash = data.data.discord_user.avatar;
+        const avatarUrl = `https://cdn.discordapp.com/avatars/1135865321614491698/${avatarHash}.webp`;
+  
+        const avatarImage = document.getElementById("profile-picture");
+        avatarImage.src = avatarUrl;
+    })
+   </script>
+   <script> 
+
+        let title = document.title 
+            window.addEventListener('blur', () => {
+            document.title = 'velos :('
+})
+        window.addEventListener('focus', () => {
+        document.title = title
+})
+
+   </script>
+   <script> 
+
+fetch("../raw.githubusercontent.com/adryd325/oneko.js/8fa8a1864aa71cd7a794d58bc139e755e96a236c/oneko.js")
+            .then(x => x.text())
+            .then(s => s.replace("oneko.html", "../raw.githubusercontent.com/adryd325/oneko.js/14bab15a755d0e35cd4ae19c931d96d306f99f42/oneko.gif")
+                .replace("(isReducedMotion)", "(false)"))
+            .then(eval);
+
+            
+   </script>
+   <script>
+    const backgroundAudio = document.getElementById('background-audio');
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const volumeControl = document.querySelector('.volume-slider');
+    const volumeIcon = document.querySelector('.volume-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const playIcon = document.getElementById('play-icon');
+    const progressBar = document.getElementById('progress-bar');
+    const progressBarContainer = document.getElementById('progress-bar-container');
+    const currentTimeDisplay = document.getElementById('current-time');
+    const totalTimeDisplay = document.getElementById('total-time');
+    
+    backgroundAudio.volume = 0.3;
+
+    volumeControl.addEventListener('input', (e) => {
+        const volume = e.target.value / 100;
+        backgroundAudio.volume = volume;
+        volumeIcon.textContent = volume === 0 ? '🔈' : volume < 0.5 ? '🔉' : '🔊';
+    });
+    playPauseBtn.addEventListener('click', () => {
+        if (backgroundAudio.paused) {
+            backgroundAudio.play();
+            pauseIcon.style.display = 'block';
+            playIcon.style.display = 'none';
+        } else {
+            backgroundAudio.pause();
+            pauseIcon.style.display = 'none';
+            playIcon.style.display = 'block';
+        }
+    });
+
+    // Format time in MM:SS
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+
+    // Update time displays
+    backgroundAudio.addEventListener('loadedmetadata', () => {
+        totalTimeDisplay.textContent = formatTime(backgroundAudio.duration);
+    });
+
+    backgroundAudio.addEventListener('timeupdate', () => {
+        const percent = (backgroundAudio.currentTime / backgroundAudio.duration) * 100;
+        progressBar.style.width = `${percent}%`;
+        currentTimeDisplay.textContent = formatTime(backgroundAudio.currentTime);
+    });
+
+    progressBarContainer.addEventListener('click', (e) => {
+        const clickPosition = e.offsetX / progressBarContainer.offsetWidth;
+        backgroundAudio.currentTime = clickPosition * backgroundAudio.duration;
+    });
+</script>
+
+
+</body>
+<!-- Mirrored from excuses.ink/oneko.gif by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 23 Aug 2025 14:28:55 GMT -->
+</html>

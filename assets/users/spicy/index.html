@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/x-icon" href="images/default.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="/images/5109-verified-black.png">
+  
+  <meta property="og:title" content="@$ ɳeo">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://expules.info/">
+  <meta content="" property="og:image" />
+  <meta property="og:description" content="McChickenMan">
+  <meta name="theme-color" content="#FFFFFF">
+
+  <link rel="stylesheet" href="css/all.min.css" crossorigin="anonymous">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    /* Video Background */
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1; /* Behind everything */
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .wrapper {
+      text-align: center;
+    }
+
+    .wrapper h1 {
+      font-size: 34px;
+      font-weight: 700;
+      font-family: "Josefin Sans", sans-serif;
+      background: linear-gradient(to right, #6789cc 10%, #ffffff 50%);
+      background-size: 200% auto;
+      color: #fff;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textclip 1.5s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes textclip {
+      to {
+        background-position: 200% center;
+      }
+    }
+
+    .click-text {
+      color: white;
+      font-size: 2em;
+      animation: glow 0.5s ease-in-out infinite alternate;
+      font-family: 'Sintony', sans-serif;
+    }
+
+    .description-text {
+      color: white;
+      font-family: 'Noto Sans Mono', monospace;
+    }
+
+    .fade-out {
+      animation: fadeOut 1s forwards;
+    }
+
+    .profile-container {
+      text-align: center;
+      position: relative;
+      background-color: rgba(0, 0, 0, 0.685);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+      max-width: 340px;
+      width: 100%;
+      border: 1px solid rgb(255, 255, 255);
+      z-index: 1;
+    }
+
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      display: block;
+      margin: 20px auto;
+    }
+
+    .profile-info {
+      margin: 10px;
+    }
+
+    .social-icons {
+      list-style: none;
+      padding: 0;
+    }
+    .social-icons li {
+      display: inline;
+      margin: 0 10px;
+    }
+    .social-icons li a {
+      color: white;
+      text-decoration: none;
+    }
+    .social-icons li a:hover {
+      text-decoration: underline;
+    }
+
+    .ip-display {
+      margin-top: 20px;
+    }
+
+    .line {
+      display: block;
+      width: 155px;
+      height: 2px;
+      background-color: #fff;
+      margin-top: 8px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+      }
+      to {
+        text-shadow: 0 0 20px white, 0 0 30px white, 0 0 40px white;
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Video Background -->
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="images/spicy.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Profile Card -->
+  <div class="profile-container">
+    <div id="overlay" class="overlay">
+      <div class="click-text">@Spicy</div>
+    </div>
+    <img src="images/pfp-22.jpg" alt="Profile Picture" class="profile-picture">
+    <div class="profile-info">
+      <div class="wrapper">
+        <h1>@Spicy</h1>
+      </div>
+      <div class="description-text">Spicymcchicken67 onda trot</div>
+    </div>
+    <ul class="social-icons">
+      <li><a href="https://discord.com/users/1280058053907058740" target="_blank"><i class="fab fa-discord"></i></a></li>
+      <li><a href="https://www.youtube.com/@Spicy" target="_blank"><i class="fab fa-youtube"></i></a></li>
+      <li><a href="https://www.tiktok.com/@spicy5400" target="_blank"><i class="fa-brands fa-tiktok"></i></a></li>
+      <li><a href="https://t.me/SpookyHacker11" target="_blank"><i class="fa-brands fa-telegram"></i></a></li>
+    </ul>
+    <div class="line"></div>
+    <div class="ip-display">
+      <p>I like McChickens</p> <span id="user-ip"></span>
+    </div>
+  </div>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sintony:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
+
+  <!-- Background Music -->
+  <audio id="background-music" src="media/Lil Peep - nuts (feat. rainy bear) (Official Audio).mp3" loop preload="auto"></audio>
+
+  <script>
+    // Overlay click event: play music & fade overlay
+    const overlay = document.getElementById('overlay');
+    overlay.addEventListener('click', function() {
+      const audio = document.getElementById('background-music');
+      audio.play();
+      this.classList.add('fade-out');
+      setTimeout(() => overlay.remove(), 1000);
+    });
+
+    // Title animation
+    const titles = ["@S", "@Sp", "@Spi", "@Spic", "@Spicy"];
+    let index = 0;
+    setInterval(() => {
+      document.title = titles[index];
+      index = (index + 1) % titles.length;
+    }, 700);
+  </script>
+
+  <!-- Sparkle Cursor -->
+  <script src="/js/trailingCursor.js"></script>
+
+  <!-- Disable DevTools -->
+  <script disable-devtool-auto src="https://cdn.jsdelivr.net/npm/disable-devtool@latest"></script>
+
+</body>
+</html>

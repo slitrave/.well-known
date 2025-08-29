@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@V8qea</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: white;
+            position: relative;
+        }
+
+        #intro-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 2;
+            /* Changed background color to solid black */
+            background-color: black;
+            cursor: pointer;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #intro-text {
+            font-size: 2em;
+            text-transform: uppercase;
+        }
+
+        #main-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: none;
+            z-index: 1;
+        }
+
+        #background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        #copyright {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8em;
+            color: #888;
+            text-shadow: 1px 1px 2px #000;
+            z-index: 3;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro-container">
+        <h1 id="intro-text">$ Fundism</h1>
+    </div>
+
+    <div id="main-content">
+        <video id="background-video" autoplay muted loop>
+            <source src="Alisa Kujou 💞 - ESPRESSO [Edit _AMV] 4K! [+Free Clips ] - godproamv (1080p, h264).mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+    </div>
+
+    <div id="copyright">
+        © 2025 Fundism (Copyright Reserved)
+    </div>
+
+    <script>
+        const introContainer = document.getElementById('intro-container');
+        const mainContent = document.getElementById('main-content');
+        const backgroundVideo = document.getElementById('background-video');
+        const backgroundAudio = document.getElementById('background-audio');
+
+        introContainer.addEventListener('click', () => {
+            // Fade out the intro screen
+            introContainer.style.opacity = '0';
+            setTimeout(() => {
+                introContainer.style.display = 'none';
+                mainContent.style.display = 'block';
+                
+                // Unmute and play the video (for silent background)
+                backgroundVideo.muted = false; 
+                backgroundVideo.play().catch(error => {
+                    console.error("Video playback failed:", error);
+                });
+
+                // Play the separate audio file
+                backgroundAudio.play().catch(error => {
+                    console.error("Audio playback failed:", error);
+                });
+            }, 1000); // Wait for the fade-out transition to complete
+        });
+    </script>
+
+</body>
+</html>

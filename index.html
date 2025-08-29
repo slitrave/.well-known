@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Enact.ink</title>
+
+<link rel="stylesheet" href="assets/css/1.css" />
+<script src="assets/js/script.js"></script>
+<script src="assets/js/sparkle.js"></script>
+<script src="assets/js/redirect.js"></script>
+<script src="assets/js/log.js"></script>
+<script src="assets/js/log2.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="https://unpkg.com/cursor-effects@latest/dist/browser.js"></script>
+
+<style>
+:root {
+  --bg: #000000;
+  --c-a: #0000006b;
+  --c-b: #ffffff38;
+  --c-c: #ffffffda;
+  --c-d: #ffffffe8;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg);
+  font-family: Arial, sans-serif;
+  color: var(--c-d);
+  overflow: hidden;
+}
+
+#background-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#flexboxcontainer, #hiddencontainer {
+  position: relative;
+  z-index: 1;
+}
+
+#flexboxcontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  flex-direction: column;
+  text-align: center;
+  cursor: pointer;
+  background: black;
+}
+
+.clicktocontinuecontainer p {
+  font-size: 2em;
+  margin: 5px 0;
+  font-family: monospace;
+}
+
+.accent {
+  color: #333333;
+  text-shadow: #333333 0 0 50px;
+}
+
+#hiddencontainer {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  background: var(--c-a);
+  border: 1.5px solid var(--c-b);
+  border-radius: 20px;
+  padding: 20px;
+  width: 320px;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.divider {
+  border: 1.5px solid var(--c-b);
+  flex-grow: 1;
+  margin-left: 5px;
+}
+
+.avatar {
+  display: inline-block;
+  position: relative;
+  margin: 10px 0;
+}
+
+.avatar img.csml {
+  position: absolute;
+  left: -8px;
+  top: -8px;
+  width: 100px;
+  height: 100px;
+}
+
+.avatar img.av {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+}
+
+.subheader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.subheader span {
+  padding: 0 12px;
+}
+
+.bio-links {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 10px;
+}
+
+.bio-links img {
+  max-width: 40px;
+  height: auto;
+  cursor: pointer;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10px 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.buttons button {
+  flex: 1 1 30%;
+  border-radius: 10px;
+  background: var(--c-a);
+  color: var(--c-d);
+  border: 1.5px solid var(--c-b);
+  cursor: pointer;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.info {
+  border: 1.5px solid var(--c-b);
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 10px;
+  background: var(--c-a);
+  font-size: 14px;
+  text-align: left;
+}
+
+.glitch-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.glitch-active {
+  opacity: 1;
+  animation: glitch 1s steps(2, start) forwards;
+}
+
+#copyright {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.8em;
+  color: #888;
+  text-shadow: 1px 1px 2px #000;
+  z-index: 3;
+  white-space: nowrap;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0,0); }
+  20% { transform: translate(-5px,5px); }
+  40% { transform: translate(5px,-5px); }
+  60% { transform: translate(-5px,0); }
+  80% { transform: translate(5px,5px); }
+  100% { transform: translate(0,0); }
+}
+</style>
+</head>
+<body>
+
+<video id="background-layer" autoplay muted loop playsinline>
+  <source src="assets/img/backgrounds/Genox_edit.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+<audio id="bg-music" loop preload="auto"></audio>
+
+<div id="flexboxcontainer">
+  <div class="clicktocontinuecontainer">
+    <p class="center accent">enact</p>
+    <p class="center">ink</p>
+  </div>
+</div>
+
+<div id="hiddencontainer">
+  <div class="glitch-overlay" id="glitch"></div>
+  <div class="card">
+    <div class="header">
+      <span>&gt; Enact</span>
+      <div class="divider"></div>
+    </div>
+    <div class="avatar">
+      <img src="./assets/img/static/cosmetics/kitty.png" class="csml" alt="kitty" />
+      <img src="./assets/img/static/images/avatar.png" class="av" alt="avatar" />
+    </div>
+    <div class="subheader">
+      <div class="divider"></div>
+      <span>ɳeo</span>
+      <div class="divider"></div>
+    </div>
+    <div class="bio-links">
+      <a href="https://www.tiktok.com" target="_blank"><img src="assets/img/static/images/tiktok.png" alt="TikTok"></a>
+      <a href="https://t.me/thugpup" target="_blank"><img src="assets/img/static/images/telegram.png" alt="Telegram"></a>
+      <a href="https://discord.com/users/669115534289403914" target="_blank"><img src="assets/img/static/images/discord.png" alt="Discord"></a>
+    </div>
+    <div class="buttons">
+      <button onclick="goToPage('assets/users/trappable/excuses.ink/index.html')">trappable</button>
+      <button onclick="goToPage('assets/users/restabbing/index.html')">restabbing</button>
+      <button onclick="goToPage('assets/users/fundism/index.html')">fundism</button>
+      <button onclick="goToPage('assets/users/spicy/index.html')">Spicy</button>
+      <button onclick="goToPage('assets/users/nicholas/index.html')">Nicholas</button>
+      <button onclick="goToPage('assets/users/v6/index.html')">V6</button>
+    </div>
+    <div class="info">
+      <strong>Information</strong><br />
+      My friends run a cool group called bloodhounds
+    </div>
+  </div>
+  <div id="copyright">
+    © 2025 Enact.ink (Copyright Reserved)
+</div>
+</div>
+
+<audio id="glitch-audio" src="assets/music/sfx/glitch.mp3"></audio>
+
+<script>
+// === Audio Mode Variable ===
+// true = use MP3, false = use MP4 video as audio
+const useMp3Audio = true;
+
+const bgMusic = document.getElementById('bg-music');
+const bgVideo = document.getElementById('background-layer');
+
+// Title cycling effect
+const titles = [
+  "E", "En", "Ena", "Enac", "Enact",
+  "Enact.", "Enact.i", "Enact.in", "Enact.ink"
+];
+let idx = 0;
+setInterval(() => {
+  document.title = titles[idx];
+  idx = (idx + 1) % titles.length;
+}, 700);
+
+document.getElementById('flexboxcontainer').addEventListener('click', function() {
+  if (useMp3Audio) {
+    // Play MP3 background music
+    const songs = ["Genox_edit.mp3"];
+    const randomSong = songs[Math.floor(Math.random() * songs.length)];
+    bgMusic.src = "assets/music/" + randomSong;
+    bgMusic.play();
+  } else {
+    // Use MP4 as audio
+    bgMusic.src = "assets/img/backgrounds/Genox_edit.mp4";
+    bgMusic.play();
+    bgVideo.play();
+  }
+
+  bgVideo.style.opacity = '1';
+  document.getElementById('flexboxcontainer').style.display = 'none';
+  document.getElementById('hiddencontainer').style.display = 'flex';
+});
+
+function goToPage(page) {
+  const audio = document.getElementById('glitch-audio');
+  const glitch = document.getElementById('glitch');
+  audio.currentTime = 0;
+  audio.play();
+  glitch.classList.add('glitch-active');
+  setTimeout(() => { window.location.href = page; }, 1000);
+}
+
+// Cursor effect
+new cursoreffects.fairyDustCursor({ colors: ["#ffffff"] });
+</script>
+
+</body>
+</html>
